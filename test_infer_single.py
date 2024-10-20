@@ -1,3 +1,5 @@
+# Testing
+
 import os
 import re
 
@@ -39,7 +41,7 @@ nfe_step = 32  # 16, 32
 cfg_strength = 2.
 ode_method = 'euler'  # euler | midpoint
 sway_sampling_coef = -1.
-speed = 1.
+speed = 0.8
 fix_duration = 27  # None (will linear estimate. if code-switched, consider fix) | float (total in seconds, include ref audio) 
 
 if exp_name == "F5TTS_Base":
@@ -53,9 +55,11 @@ elif exp_name == "E2TTS_Base":
 ckpt_path = f"ckpts/{exp_name}/model_{ckpt_step}.pt"
 output_dir = "tests"
 
-ref_audio = "tests/ref_audio/test_en_1_ref_short.wav"
-ref_text = "Some call me nature, others call me mother nature."
-gen_text = "I don't really care what you call me. I've been a silent spectator, watching species evolve, empires rise and fall. But always remember, I am mighty and enduring. Respect me and I'll nurture you; ignore me and you shall face the consequences."
+ref_audio = "tests/ref_audio/input.wav"
+ref_text = ""
+
+gen_text_ = ""
+
 
 # ref_audio = "tests/ref_audio/test_zh_1_ref_short.wav"
 # ref_text = "对，这就是我，万人敬仰的太乙真人。"
@@ -154,6 +158,6 @@ generated_wave = vocos.decode(generated_mel_spec.cpu())
 if rms < target_rms:
     generated_wave = generated_wave * rms / target_rms
 
-save_spectrogram(generated_mel_spec[0].cpu().numpy(), f"{output_dir}/test_single.png")
-torchaudio.save(f"{output_dir}/test_single.wav", generated_wave, target_sample_rate)
+save_spectrogram(generated_mel_spec[0].cpu().numpy(), f"{output_dir}/test_single_dbday.png")
+torchaudio.save(f"{output_dir}/test_single_dbday.wav", generated_wave, target_sample_rate)
 print(f"Generated wav: {generated_wave.shape}")

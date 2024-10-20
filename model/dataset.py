@@ -8,6 +8,7 @@ from torch.utils.data import Dataset, Sampler
 import torchaudio
 from datasets import load_dataset, load_from_disk
 from datasets import Dataset as Dataset_
+from typing import Union
 
 from einops import rearrange
 
@@ -66,7 +67,6 @@ class HFDataset(Dataset):
             mel_spec = mel_spec,
             text = text,
         )
-
 
 class CustomDataset(Dataset):
     def __init__(
@@ -181,14 +181,13 @@ class DynamicBatchSampler(Sampler[list[int]]):
 
 
 # Load dataset
-
 def load_dataset(
         dataset_name: str,
         tokenizer: str,
         dataset_type: str = "CustomDataset", 
         audio_type: str = "raw", 
         mel_spec_kwargs: dict = dict()
-        ) -> CustomDataset | HFDataset:
+        ) -> Union[CustomDataset, HFDataset]:
     
     print("Loading dataset ...")
 
