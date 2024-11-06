@@ -116,6 +116,7 @@ def cleanup_old_files(directory: Path, max_age_hours: int = 1):
 def root():
     return {"data":"API's for Voice Cloning"}
 
+# This API route is for transcription
 @app.post("/api/transcribe", response_model=TranscriptionResponse)
 async def transcribe_audio(audio_file: UploadFile = File(...)):
     """Transcribe uploaded audio file"""
@@ -144,6 +145,7 @@ async def transcribe_audio(audio_file: UploadFile = File(...)):
         if temp_path.exists():
             temp_path.unlink()
 
+# This API route is for Synthesizing
 @app.post("/api/synthesize", response_model=TTSResponse)
 async def synthesize_speech(
     request: TTSRequest,
