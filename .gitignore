@@ -7,8 +7,6 @@ ckpts/
 wandb/
 results/
 
-
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -145,6 +143,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+temp_files/
 
 # Spyder project settings
 .spyderproject
